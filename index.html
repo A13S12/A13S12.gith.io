@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FixLab | Centro de reparacion movil</title>
+  <link rel="stylesheet" href="styles.css">
+
+
+
+
+
+</head>
+<body>
+<section id="sc-login" aria-labelledby="sc-title">
+  <div class="sc-card">
+    <div class="sc-logo" aria-hidden="true">SE</div>
+    <span class="sc-brand">SERVICELL EXPRESS</span>
+    <h1 id="sc-title">Iniciar sesión</h1>
+    <p>Ingresa tus credenciales para acceder al sistema de gestión del taller.</p>
+    <form id="sc-login-form">
+      <label for="sc-user">Usuario</label>
+      <input id="sc-user" name="username" autocomplete="username" placeholder="Escribe tu usuario" required autofocus autocapitalize="none" spellcheck="false">
+      <label for="sc-password">Contraseña</label>
+      <div class="sc-password">
+        <input id="sc-password" name="password" type="password" autocomplete="current-password" placeholder="Escribe tu contraseña" required aria-describedby="sc-error">
+        <button id="sc-toggle" type="button" aria-label="Mostrar contraseña" aria-pressed="false">Mostrar</button>
+      </div>
+      <p id="sc-error" role="alert" aria-live="polite"></p>
+      <button id="sc-submit" type="submit">Ingresar al sistema →</button>
+    </form>
+    <button type="button" class="sc-create-btn" id="sc-open-create">＋ Crear nuevo usuario</button>
+    <p class="sc-foot">Gestión de servicios técnicos</p>
+    <noscript><p>Activa JavaScript en tu navegador para utilizar el sistema.</p></noscript>
+  </div>
+</section>
+<dialog id="sc-create-dialog" aria-labelledby="sc-create-title">
+  <div class="sc-dlg">
+    <div class="sc-dlg-head">
+      <div>
+        <span class="sc-dlg-brand">SERVICELL EXPRESS</span>
+        <h2 id="sc-create-title">Generar nuevo usuario</h2>
+        <p>Crea la cuenta, comparte la contraseña y la persona podrá ingresar al sistema.</p>
+      </div>
+      <button type="button" class="sc-dlg-close" id="sc-create-close" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="sc-dlg-body" id="sc-create-root"></div>
+  </div>
+</dialog>
+<div id="sc-system" hidden inert>
+
+  <div class="page-progress" id="pageProgress"></div>
+  <div class="hardware-watermark" aria-hidden="true">
+    <div class="ambient ambient-a"></div>
+    <div class="ambient ambient-b"></div>
+    <div class="pc-stage" id="pcStage">
+      <div class="pc-shadow"></div>
+      <div class="pc-photo" id="pcPhoto"></div>
+      <div class="part shell shell-back" data-x="-260" data-y="-30" data-r="-6" data-z="-80"><span class="shell-grid"></span></div>
+      <div class="part shell shell-front" data-x="280" data-y="-10" data-r="6" data-z="70"><span class="front-fan"></span><span class="front-fan"></span></div>
+      <div class="part motherboard" data-x="-230" data-y="-110" data-r="-7" data-z="100"><div class="board-photo"></div><span class="cpu-socket"></span><span class="board-chip c1"></span><span class="board-chip c2"></span></div>
+      <div class="part gpu" data-x="280" data-y="40" data-r="7" data-z="150"><div class="gpu-photo"></div><span class="gpu-fan gf1"></span><span class="gpu-fan gf2"></span></div>
+      <div class="part cooler" data-x="130" data-y="-250" data-r="11" data-z="190"><span class="cooler-ring"></span><span class="cooler-core"></span></div>
+      <div class="part ram ram-a" data-x="270" data-y="-170" data-r="14" data-z="180"><i></i><i></i><i></i><i></i></div>
+      <div class="part ram ram-b" data-x="320" data-y="-215" data-r="18" data-z="210"><i></i><i></i><i></i><i></i></div>
+      <div class="part ssd" data-x="270" data-y="220" data-r="-10" data-z="160"><b>FIX</b><span>LAB</span><i></i><i></i><i></i></div>
+      <div class="part psu" data-x="-240" data-y="240" data-r="8" data-z="110"><span class="psu-fan"></span><b>TEST</b></div>
+      <div class="part cables" data-x="-300" data-y="130" data-r="-18" data-z="80"><span></span><span></span><span></span></div>
+      <div class="scan-line"></div>
+    </div>
+    <div class="hardware-state"><span>DIAGNOSTICO // SCROLL</span><strong id="stateLabel">EQUIPO LISTO</strong><div class="state-track"><i id="stateBar"></i></div></div>
+  </div>
+
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#inicio"><span>F</span><strong>FIX<span>LAB</span></strong><small>TALLER MOVIL</small></a>
+      <div class="branch"><i></i><div><b>Sucursal Central</b><small>Av. Ayacucho Esq. Santivañez · Abierto hoy · 08:00–18:00</small></div></div>
+      <nav class="main-nav" aria-label="Navegacion principal">
+        <a class="active" href="#inicio"><span>▦</span> Resumen</a>
+        <a href="#ordenes"><span>▤</span> Ordenes de trabajo <b class="nav-count">8</b></a>
+        <a href="#inventario"><span>◈</span> Inventario</a>
+        <a href="#almacen" title="Almacén" aria-label="Almacén"><span>▣</span> Almacén</a>
+        <a href="#clientes"><span>◎</span> Clientes</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <a href="#configuracion"><span>⚙</span> Configuracion</a>
+        <div class="user"><span class="avatar">SM</span><div><b>Sergio M. Coca Muños</b><small>Tecnico principal</small></div><span class="more">···</span></div>
+      </div>
+    </aside>
+
+    <main class="workspace" id="inicio">
+      <header class="topbar">
+        <div class="mobile-brand"><span>F</span><b>FIXLAB</b></div>
+        <div class="search"><span>⌕</span><input type="search" placeholder="Buscar orden, cliente o IMEI..." aria-label="Buscar"></div>
+        <div class="top-actions">
+          <button id="sc-logout" type="button">Cerrar sesión</button>
+          <button class="icon-button" id="notificationsBtn" aria-label="Notificaciones">♢<i></i></button>
+          <button class="avatar top-avatar">JP</button>
+        </div>
+      </header>
+
+      <section class="page-heading">
+        <div>
+          <span class="eyebrow">MARTES, 15 SEP 2026 · TURNO MAÑANA</span>
+          <h1>Resumen del taller</h1>
+          <p>Esto es lo que ocurre hoy en tu centro de reparacion.</p>
+        </div>
+        <div class="page-heading-actions">
+          <button class="secondary-action" id="topReportsBtn" type="button">🔒 Reportes</button>
+          <button class="primary-button" id="newRepair"><span>＋</span> Nueva reparacion</button>
+        </div>
+      </section>
+
+      <section class="stats-grid" aria-label="Indicadores del taller">
+        <article class="stat-card"><div class="stat-icon blue">⌁</div><div><span>Ordenes activas</span><strong>24</strong><small class="up">↑ 12.5% <em>vs. semana pasada</em></small></div></article>
+        <article class="stat-card"><div class="stat-icon orange">◷</div><div><span>En diagnostico</span><strong>8</strong><small class="neutral">3 requieren atencion</small></div></article>
+        <article class="stat-card"><div class="stat-icon green">✓</div><div><span>Listas para entregar</span><strong>11</strong><small class="up">↑ 8.2% <em>vs. semana pasada</em></small></div></article>
+      </section>
+
+      <section class="content-grid" id="ordenes">
+        <article class="panel orders-panel">
+          <div class="panel-heading"><div><h2>Ordenes recientes</h2><p>Seguimiento de los ultimos equipos recibidos</p></div><div><button class="secondary-action" id="editOrdersBtn" type="button">Editar ordenes</button><a href="#ordenes">Ver todas <span>→</span></a></div></div>
+          <div class="filters">
+            <button class="filter active">Todas <b>24</b></button>
+            <button class="filter">En reparacion <b>8</b></button>
+            <button class="filter">Listas <b>11</b></button>
+            <button class="filter">Esperando pieza <b>5</b></button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>ORDEN</th><th>FECHA RECIBIDO</th><th>CLIENTE / EQUIPO</th><th>PROBLEMA</th><th>ESTADO</th><th>FECHA DE ENTREGA</th><th>AVISO</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><b class="order-id">#FL-1048</b><small>Orden creada hoy</small></td><td><b>Hoy, 09:42</b></td><td><div class="device"><span class="device-icon iphone">▯</span><div><b>Maria Gonzalez</b><small>iPhone 13 Pro</small></div></div></td><td>Pantalla rota</td><td><span class="status in-progress">En reparacion</span></td><td><b>Hoy, 17:00</b></td><td><div class="order-actions"><button class="whatsapp-order-btn" type="button">WhatsApp</button><button class="row-menu">···</button></div></td></tr>
+                <tr><td><b class="order-id">#FL-1047</b><small>Orden creada ayer</small></td><td><b>Ayer, 16:20</b></td><td><div class="device"><span class="device-icon samsung">▯</span><div><b>Carlos Rojas</b><small>Samsung S22</small></div></div></td><td>Cambio de bateria</td><td><span class="status ready">Lista para entregar</span></td><td><b>Hoy, 12:30</b></td><td><div class="order-actions"><button class="whatsapp-order-btn" type="button">WhatsApp</button><button class="row-menu">···</button></div></td></tr>
+                <tr><td><b class="order-id">#FL-1046</b><small>Orden creada ayer</small></td><td><b>Ayer, 14:08</b></td><td><div class="device"><span class="device-icon xiaomi">▯</span><div><b>Diego Fernandez</b><small>Xiaomi 13 Lite</small></div></div></td><td>No enciende</td><td><span class="status waiting">Esperando pieza</span></td><td><b>18 Sep, 10:00</b></td><td><div class="order-actions"><button class="whatsapp-order-btn" type="button">WhatsApp</button><button class="row-menu">···</button></div></td></tr>
+                <tr><td><b class="order-id">#FL-1045</b><small>Orden creada ayer</small></td><td><b>Ayer, 11:35</b></td><td><div class="device"><span class="device-icon motorola">▯</span><div><b>Ana Morales</b><small>Motorola Edge 40</small></div></div></td><td>Puerto de carga</td><td><span class="status diagnosis">Diagnostico</span></td><td><b>Por confirmar</b></td><td><div class="order-actions"><button class="whatsapp-order-btn" type="button">WhatsApp</button><button class="row-menu">···</button></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <aside class="panel activity-panel">
+          <div class="panel-heading"><div><h2>Actividad</h2><p>Actualizaciones recientes</p></div><button class="dots">···</button></div>
+          <div class="activity-list">
+            <div class="activity"><span class="activity-avatar blue-bg">MG</span><div><p><b>Maria Gonzalez</b> aprobo el presupuesto</p><small>Hace 12 minutos · <strong>#FL-1048</strong></small></div></div>
+            <div class="activity"><span class="activity-avatar green-bg">✓</span><div><p>Orden <b>#FL-1047</b> marcada como lista</p><small>Hace 38 minutos · por Juan Perez</small></div></div>
+            <div class="activity"><span class="activity-avatar orange-bg">+</span><div><p>Nueva orden recibida en recepcion</p><small>Hace 1 hora · <strong>#FL-1048</strong></small></div></div>
+            <div class="activity"><span class="activity-avatar purple-bg">AL</span><div><p><b>Andrea Lopez</b> dejo una resena</p><small>Hace 2 horas · 5 estrellas</small></div></div>
+          </div>
+          <button class="activity-link" id="viewActivityBtn">Ver toda la actividad <span>→</span></button>
+        </aside>
+      </section>
+
+      <section class="lower-grid">
+        <article class="panel inventory-panel" id="inventario">
+          <div class="panel-heading"><div><h2>Inventario critico</h2><p>Piezas que necesitan reposicion</p></div><div><button class="secondary-action" id="editInventoryBtn" type="button">Editar inventario</button><a href="#inventario">Gestionar inventario <span>→</span></a></div></div>
+          <div class="inventory-row"><div class="part-thumb battery">▰</div><div class="part-name"><b>Bateria iPhone 11</b><small>SKU: BAT-IP11-ORG</small></div><div class="stock"><span>Stock actual</span><b>2 unidades</b><i><em class="stock-low"></em></i></div><span class="stock-warning">Critico</span></div>
+          <div class="inventory-row"><div class="part-thumb screen">▣</div><div class="part-name"><b>Pantalla Samsung A52</b><small>SKU: LCD-SA52-AMO</small></div><div class="stock"><span>Stock actual</span><b>4 unidades</b><i><em class="amber stock-medium"></em></i></div><span class="stock-warning amber-text">Bajo</span></div>
+          <div class="inventory-row"><div class="part-thumb port">⌁</div><div class="part-name"><b>Flex puerto Lightning</b><small>SKU: FPC-IP13-ORG</small></div><div class="stock"><span>Stock actual</span><b>6 unidades</b><i><em class="blue-fill stock-high"></em></i></div><span class="stock-warning amber-text">Bajo</span></div>
+        </article>
+
+        <article class="panel schedule-panel">
+          <div class="panel-heading"><div><h2>Agenda de hoy</h2><p>Proximas citas y entregas</p></div><button class="calendar" id="calendarBtn" aria-label="Ver agenda">▣</button></div>
+          <div class="schedule-item"><time>10:30</time><div><b>Recepcion de equipo</b><small>Samsung Galaxy S23 · Luis Vargas</small></div><span class="dot blue-dot"></span></div>
+          <div class="schedule-item"><time>12:30</time><div><b>Entrega programada</b><small>Samsung S22 · Carlos Rojas</small></div><span class="dot green-dot"></span></div>
+          <div class="schedule-item"><time>15:00</time><div><b>Diagnostico express</b><small>iPhone 14 · Paula Salazar</small></div><span class="dot orange-dot"></span></div>
+          <div class="schedule-item"><time>17:00</time><div><b>Entrega programada</b><small>iPhone 13 Pro · Maria Gonzalez</small></div><span class="dot green-dot"></span></div>
+        </article>
+      </section>
+
+      <section class="integration-section" id="inventario-completo">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">CONTROL DE PIEZAS</span>
+            <h2>Inventario</h2>
+            <p>Consulta existencias, niveles minimos y proveedores.</p>
+          </div>
+          <button class="secondary-action" id="requestPartsBtn" type="button">＋ Solicitar piezas</button>
+        </div>
+        <div class="integration-grid">
+          <article class="panel inventory-table">
+            <div class="list-toolbar"><strong>Catalogo de repuestos</strong><input class="local-search" data-target=".inventory-item" placeholder="Buscar SKU o pieza..."></div>
+            <div class="inventory-item"><span class="part-thumb battery">▰</span><div><b>Bateria iPhone 11</b><small>BAT-IP11-ORG · Proveedor: Mobile Parts</small></div><strong class="quantity critical-quantity">2 uds.</strong><span class="stock-warning">Critico</span></div>
+            <div class="inventory-item"><span class="part-thumb screen">▣</span><div><b>Pantalla Samsung A52</b><small>LCD-SA52-AMO · Proveedor: Display Hub</small></div><strong class="quantity">4 uds.</strong><span class="stock-warning amber-text">Bajo</span></div>
+            <div class="inventory-item"><span class="part-thumb port">⌁</span><div><b>Flex puerto Lightning</b><small>FPC-IP13-ORG · Proveedor: Mobile Parts</small></div><strong class="quantity">6 uds.</strong><span class="stock-warning amber-text">Bajo</span></div>
+            <div class="inventory-item"><span class="part-thumb screen">▣</span><div><b>Pantalla iPhone 13 Pro</b><small>LCD-IP13-OLED · Proveedor: Original Tech</small></div><strong class="quantity healthy-quantity">12 uds.</strong><span class="stock-warning healthy-text">Disponible</span></div>
+          </article>
+          <aside class="panel supply-card">
+            <span class="stat-icon orange">◷</span>
+            <strong>3</strong>
+            <p>productos bajo el minimo</p>
+            <div class="summary-line"><span>Ultima reposicion</span><b>12 Sep</b></div>
+            <div class="summary-line"><span>Pedido pendiente</span><b>8 piezas</b></div>
+            <div class="purchase-request-list" id="purchaseRequestList">
+              <div class="purchase-request-item"><span>Bateria iPhone 11</span><strong>Bs 180.00</strong></div>
+              <div class="purchase-request-item"><span>Pantalla Samsung A52</span><strong>Bs 240.00</strong></div>
+            </div>
+            <button class="activity-link" data-toast="Pedido abierto">Ver pedidos →</button>
+          </aside>
+        </div>
+      </section>
+
+      <section class="integration-section" id="piezas">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">PIEZAS</span>
+            <h2>Piezas</h2>
+            <p>Catalogo de repuestos y seguimiento por pieza.</p>
+          </div>
+          <button class="secondary-action" id="newPartBtn" type="button">＋ Nueva pieza</button>
+        </div>
+        <div class="integration-grid">
+          <article class="panel inventory-table">
+            <div class="list-toolbar"><strong>Catalogo de piezas</strong><input class="local-search" data-target=".inventory-item" placeholder="Buscar pieza..."></div>
+            <div class="inventory-item" data-part-name="Bateria iPhone 11" data-part-price="180" data-part-stock="2" data-part-supplier="Mobile Parts" data-part-status="Critico"><span class="part-thumb battery">▰</span><div><b>Bateria iPhone 11</b><small>BAT-IP11-ORG · Proveedor: Mobile Parts</small></div><strong class="quantity critical-quantity">2 uds.</strong><span class="stock-warning">Critico</span><button class="row-menu edit-part-btn" type="button" aria-label="Editar Bateria iPhone 11">···</button></div>
+            <div class="inventory-item" data-part-name="Pantalla Samsung A52" data-part-price="240" data-part-stock="4" data-part-supplier="Display Hub" data-part-status="Bajo"><span class="part-thumb screen">▣</span><div><b>Pantalla Samsung A52</b><small>LCD-SA52-AMO · Proveedor: Display Hub</small></div><strong class="quantity">4 uds.</strong><span class="stock-warning amber-text">Bajo</span><button class="row-menu edit-part-btn" type="button" aria-label="Editar Pantalla Samsung A52">···</button></div>
+            <div class="inventory-item" data-part-name="Flex puerto Lightning" data-part-price="120" data-part-stock="6" data-part-supplier="Mobile Parts" data-part-status="Bajo"><span class="part-thumb port">⌁</span><div><b>Flex puerto Lightning</b><small>FPC-IP13-ORG · Proveedor: Mobile Parts</small></div><strong class="quantity">6 uds.</strong><span class="stock-warning amber-text">Bajo</span><button class="row-menu edit-part-btn" type="button" aria-label="Editar Flex puerto Lightning">···</button></div>
+            <div class="inventory-item" data-part-name="Pantalla iPhone 13 Pro" data-part-price="420" data-part-stock="12" data-part-supplier="Original Tech" data-part-status="Disponible"><span class="part-thumb screen">▣</span><div><b>Pantalla iPhone 13 Pro</b><small>LCD-IP13-OLED · Proveedor: Original Tech</small></div><strong class="quantity healthy-quantity">12 uds.</strong><span class="stock-warning healthy-text">Disponible</span><button class="row-menu edit-part-btn" type="button" aria-label="Editar Pantalla iPhone 13 Pro">···</button></div>
+          </article>
+          <aside class="panel supply-card">
+            <span class="stat-icon orange">◷</span>
+            <strong>4</strong>
+            <p>piezas activas en pedido</p>
+            <div class="summary-line"><span>Precio total estimado</span><b>Bs 1.250,00</b></div>
+            <div class="summary-line"><span>Ultima revisada</span><b>Hoy</b></div>
+            <div class="purchase-request-list">
+              <div class="purchase-request-item"><span>Bateria iPhone 11</span><strong>Bs 180.00</strong></div>
+              <div class="purchase-request-item"><span>Pantalla A52</span><strong>Bs 240.00</strong></div>
+              <div class="purchase-request-item"><span>Flex Lightning</span><strong>Bs 120.00</strong></div>
+            </div>
+            <button class="activity-link" data-toast="Piezas revisadas">Ver piezas →</button>
+          </aside>
+        </div>
+      </section>
+
+      <section class="integration-section" id="clientes">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">CRM DEL TALLER</span>
+            <h2>Clientes</h2>
+            <p>Historial de visitas, equipos y comunicacion.</p>
+          </div>
+          <button class="secondary-action" id="newClientBtn" type="button">＋ Nuevo cliente</button>
+        </div>
+        <div class="integration-grid">
+          <article class="panel client-list">
+            <div class="list-toolbar"><strong>Directorio de clientes</strong><input class="local-search" data-target=".client-row" placeholder="Buscar cliente..."></div>
+            <div class="client-row"><span class="client-avatar blue-bg">MG</span><div><b>Maria Gonzalez</b><small>3 reparaciones · Ultima visita hoy</small></div><span class="client-device">iPhone 13 Pro</span><span class="client-status active-client">Activo</span><button class="row-menu">···</button></div>
+            <div class="client-row"><span class="client-avatar green-bg">CR</span><div><b>Carlos Rojas</b><small>5 reparaciones · Ultima visita ayer</small></div><span class="client-device">Samsung S22</span><span class="client-status active-client">Activo</span><button class="row-menu">···</button></div>
+            <div class="client-row"><span class="client-avatar purple-bg">AL</span><div><b>Andrea Lopez</b><small>1 reparacion · Ultima visita 12 Sep</small></div><span class="client-device">iPhone 14</span><span class="client-status">Seguimiento</span><button class="row-menu">···</button></div>
+          </article>
+          <aside class="panel client-summary"><span class="stat-icon blue">◎</span><strong>86</strong><p>Clientes registrados</p><div class="summary-line"><span>Nuevos este mes</span><b>+14</b></div><div class="summary-line"><span>Clientes recurrentes</span><b>62%</b></div><button class="activity-link" data-toast="Exportacion preparada">Exportar directorio →</button></aside>
+        </div>
+      </section>
+
+<section class="integration-section" id="productos-pedir">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">PEDIDOS EXTRA</span>
+            <h2>Productos para pedir</h2>
+            <p>Solicita equipos y accesorios adicionales para venta o reforzar el inventario.</p>
+          </div>
+          <button class="secondary-action" id="requestProductsBtn" type="button">＋ Solicitar productos</button>
+        </div>
+        <div class="integration-grid">
+          <article class="panel inventory-table">
+            <div class="list-toolbar"><strong>Catalogo de productos</strong></div>
+            <div class="inventory-item"><span class="part-thumb screen">◫</span><div><b>Laptops</b><small>Modelos para trabajo, estudio y gaming</small></div><strong class="quantity">Disponibles</strong><span class="stock-warning healthy-text">Solicitar</span></div>
+            <div class="inventory-item"><span class="part-thumb battery">◔</span><div><b>Relojes digitales</b><small>Con alarma, cronometro y resistencia al agua</small></div><strong class="quantity">Stock alto</strong><span class="stock-warning healthy-text">Solicitar</span></div>
+            <div class="inventory-item"><span class="part-thumb port">◍</span><div><b>Parlantes</b><small>Portatiles y de escritorio con sonido potente</small></div><strong class="quantity">En demanda</strong><span class="stock-warning amber-text">Pedir</span></div>
+            <div class="inventory-item"><span class="part-thumb screen">▣</span><div><b>Pates electronicas</b><small>Modelos para uso personal y profesional</small></div><strong class="quantity">Revisar stock</strong><span class="stock-warning amber-text">Pedir</span></div>
+          </article>
+          <aside class="panel supply-card">
+            <span class="stat-icon blue">◉</span>
+            <strong>4</strong>
+            <p>categorias activas para pedido</p>
+            <div class="summary-line"><span>Ultimo pedido</span><b>Hoy</b></div>
+            <div class="summary-line"><span>Estado</span><b>Abierto</b></div>
+            <button class="activity-link" data-toast="Pedido listo">Ver pedido →</button>
+          </aside>
+        </div>
+      </section>
+
+
+<section class="integration-section" id="almacen">
+ <div class="section-heading"><div><span class="eyebrow">EXISTENCIAS Y REPOSICIÓN</span><h2>Almacén</h2><p>Revisa lo que tienes y prepara lo que necesitas pedir.</p></div><button class="primary-button" id="wh-add">＋ Nuevo repuesto</button></div>
+ <p class="wh-note">Los registros iniciales son ejemplos del archivo. Ajusta las cantidades a tu almacén. Los cambios se guardan en este navegador. Los pedidos no se envían al proveedor.</p>
+ <div class="wh-stats" id="wh-stats"></div>
+ <article class="panel wh-panel"><div class="wh-toolbar"><label>Buscar repuesto<input id="wh-search" type="search" placeholder="Nombre o proveedor"></label><label>Mostrar<select id="wh-filter"><option value="all">Todos los repuestos</option><option value="low">Stock bajo o agotado</option><option value="need">Necesitan pedido</option></select></label><button class="secondary-action" id="wh-export">Descargar lista de compra</button></div>
+ <p class="wh-note">Stock bajo: existencias iguales o inferiores al mínimo. Pedido sugerido = objetivo − existencias − unidades pendientes, cuando se alcanza el mínimo.</p>
+ <div class="table-wrap"><table class="wh-table"><thead><tr><th>Repuesto / proveedor</th><th>Disponible</th><th>Mínimo</th><th>Objetivo</th><th>Pendiente</th><th>A pedir</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="wh-rows"></tbody></table></div></article>
+ <article class="panel wh-panel"><h3>Pedidos registrados</h3><p class="wh-note">Al recibir un pedido, sus unidades se suman al stock una sola vez.</p><div id="wh-orders"></div></article>
+ <p id="wh-message" role="status" aria-live="polite"></p>
+</section>
+<dialog id="wh-dialog"><form id="wh-form"><h2 id="wh-title"></h2><div id="wh-fields"></div><p id="wh-error" role="alert"></p><div class="modal-actions"><button type="button" class="secondary-button" id="wh-cancel">Cancelar</button><button class="primary-button">Guardar</button></div></form></dialog>
+      <footer><span>© 2026 FixLab</span><span>Centro de reparacion movil</span><a href="#" id="footerReportsBtn">🔒 Ver reportes</a></footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="repairModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="closeModal" aria-label="Cerrar">×</button>
+      <span class="eyebrow">NUEVA ORDEN DE TRABAJO</span>
+      <h2 id="modalTitle">Registrar reparacion</h2>
+      <p>Completa los datos basicos para crear una orden.</p>
+      <form id="repairForm">
+        <label>Cliente<input name="client" required placeholder="Nombre completo"></label>
+        <label>WhatsApp del cliente<input name="phone" inputmode="tel" required placeholder="Ej. 70000000 o +59170000000"></label>
+        <div class="form-row">
+          <label>Dispositivo<input name="device" required placeholder="Marca y modelo"></label>
+          <label>Problema<select name="issue"><option>Pantalla rota</option><option>Cambio de bateria</option><option>No enciende</option><option>Puerto de carga</option><option>Otro diagnostico</option></select></label>
+        </div>
+        <label>Precio de la reparacion (Bs)<input name="price" type="number" min="0" step="0.01" required placeholder="Ej. 250.00"></label>
+        <label>Fecha y hora de recibido<input name="received" type="datetime-local" required></label>
+        <label>Fecha y hora de entrega<input name="delivery" type="datetime-local" required></label>
+        <label>Notas del tecnico<textarea name="notes" rows="3" placeholder="Detalles visibles, accesorios recibidos..."></textarea></label>
+        <div class="modal-actions"><button type="button" class="secondary-button" id="cancelModal">Cancelar</button><button class="primary-button" type="submit">Crear orden</button></div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="purchaseModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="purchaseTitle">
+      <button class="modal-close" id="closePurchaseModal" aria-label="Cerrar">×</button>
+      <span class="eyebrow">SOLICITUD DE INVENTARIO</span>
+      <h2 id="purchaseTitle">Solicitar piezas</h2>
+      <p>Completa el repuesto, cantidad y proveedor para pedirlo.</p>
+      <form id="purchaseForm">
+        <label><span id="purchaseItemLabel">Repuesto</span><select name="part" required>
+          <option>Bateria iPhone 11</option>
+          <option>Pantalla Samsung A52</option>
+          <option>Flex puerto Lightning</option>
+          <option>Pantalla iPhone 13 Pro</option>
+          <option>Parlante portatil</option>
+          <option>Reloj digital</option>
+        </select></label>
+        <div class="form-row">
+          <label>Cantidad<input type="number" name="quantity" min="1" value="1" required></label>
+          <label>Precio (Bs)<input type="number" name="price" min="0" step="0.01" required placeholder="Ej. 120.00"></label>
+        </div>
+        <div class="form-row">
+          <label>Prioridad<select name="priority"><option>Normal</option><option>Urgente</option><option>Para hoy</option></select></label>
+          <label>Proveedor<input name="supplier" placeholder="Nombre del proveedor" required></label>
+        </div>
+        <label>Notas<textarea name="notes" rows="3" placeholder="Detalles extra, referencia o observacion..."></textarea></label>
+        <div class="modal-actions"><button type="button" class="secondary-button" id="cancelPurchaseModal">Cancelar</button><button class="primary-button" type="submit">Enviar solicitud</button></div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="clientModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="clientTitle">
+      <button class="modal-close" id="closeClientModal" aria-label="Cerrar">×</button>
+      <span class="eyebrow">CRM DEL TALLER</span>
+      <h2 id="clientTitle">Registrar cliente</h2>
+      <p>Guarda los datos basicos para consultar su historial despues.</p>
+      <form id="clientForm">
+        <label>Nombre completo<input name="name" required placeholder="Nombre y apellido"></label>
+        <div class="form-row">
+          <label>Telefono / WhatsApp<input name="phone" inputmode="tel" required placeholder="Ej. 70000000"></label>
+          <label>Equipo<input name="device" required placeholder="Marca y modelo"></label>
+        </div>
+        <div class="form-row">
+          <label>Precio estimado (Bs)<input name="estimatedPrice" type="number" min="0" step="0.01" required placeholder="Ej. 350.00"></label>
+          <label>Precio del trabajo (Bs)<input name="workPrice" type="number" min="0" step="0.01" required placeholder="Ej. 250.00"></label>
+        </div>
+        <label>Notas<textarea name="notes" rows="3" placeholder="Observaciones del cliente..."></textarea></label>
+        <div class="modal-actions"><button type="button" class="secondary-button" id="cancelClientModal">Cancelar</button><button class="primary-button" type="submit">Guardar cliente</button></div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="partModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="partTitle">
+      <button class="modal-close" id="closePartModal" aria-label="Cerrar">×</button>
+      <span class="eyebrow">GESTION DE PIEZAS</span>
+      <h2 id="partTitle">Registrar pieza</h2>
+      <p>Agrega la pieza con su precio, stock y proveedor.</p>
+      <form id="partForm">
+        <label>Nombre de la pieza<input name="partName" required placeholder="Ej. Bateria iPhone 11"></label>
+        <div class="form-row">
+          <label>Precio (Bs)<input name="partPrice" type="number" min="0" step="0.01" required placeholder="Ej. 180.00"></label>
+          <label>Stock<input name="partStock" type="number" min="0" required value="1"></label>
+        </div>
+        <label>Proveedor<input name="partSupplier" required placeholder="Nombre del proveedor"></label>
+        <label>Estado<select name="partStatus"><option>Disponible</option><option>Bajo</option><option>Critico</option><option>Solicitado</option></select></label>
+        <div class="modal-actions"><button type="button" class="secondary-button" id="cancelPartModal">Cancelar</button><button class="primary-button" type="submit">Guardar pieza</button></div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="reportsAccessModal" hidden>
+    <div class="modal reports-access-modal" role="dialog" aria-modal="true" aria-labelledby="reportsAccessTitle">
+      <button class="modal-close" id="closeReportsAccessModal" aria-label="Cerrar">×</button>
+      <span class="eyebrow">ACCESO PROTEGIDO</span>
+      <h2 id="reportsAccessTitle">Ingresar a Reportes</h2>
+      <p>Introduce la contraseña para consultar los reportes del taller.</p>
+      <form id="reportsAccessForm" autocomplete="off">
+        <label>Contraseña
+          <input id="reportsPasswordInput" name="reportsPassword" type="password" required autocomplete="current-password" placeholder="Escribe la contraseña">
+        </label>
+        <p id="reportsPasswordError" class="reports-password-error" role="alert" aria-live="polite"></p>
+        <div class="modal-actions">
+          <button type="button" class="secondary-button" id="cancelReportsAccess">Cancelar</button>
+          <button class="primary-button" type="submit">🔓 Ingresar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="reportsFullModal" hidden>
+    <div class="modal reports-full-modal" role="dialog" aria-modal="true" aria-labelledby="reportsFullTitle">
+      <button class="modal-close" id="closeReportsFullModal" aria-label="Cerrar">×</button>
+      <span class="eyebrow">VISTA COMPLETA</span>
+      <h2 id="reportsFullTitle">Reportes del taller</h2>
+      <p>Indicadores principales y resumen general del rendimiento del taller.</p>
+      <div class="reports-full-grid">
+        <div class="reports-full-metric"><span class="stat-icon green">✓</span><div><small>Ordenes completadas</small><strong>42</strong><em>↑ 8 esta semana</em></div></div>
+        <div class="reports-full-metric"><span class="stat-icon orange">◷</span><div><small>Ticket promedio</small><strong>Bs 439</strong><em>Por reparacion</em></div></div>
+        <div class="reports-full-metric"><span class="stat-icon blue">◎</span><div><small>Clientes activos</small><strong>86</strong><em>+14 este mes</em></div></div>
+        <div class="reports-full-metric"><span class="stat-icon red">!</span><div><small>Ordenes pendientes</small><strong>13</strong><em>5 esperan piezas</em></div></div>
+      </div>
+      <div class="report-grid" style="margin-block-start: 18px;">
+        <article class="panel chart-panel">
+          <div class="panel-heading"><div><h2>Ingresos por semana</h2><p>Detalle de ingresos semanales</p></div><span class="chart-trend">↑ 16.4%</span></div>
+          <div class="chart"><i class="bar-1"></i><i class="bar-2"></i><i class="bar-3"></i><i class="bar-4"></i><i class="bar-5"></i><i class="bar-6"></i><i class="bar-7"></i></div>
+          <div class="chart-labels"><span>Sem 1</span><span>Sem 2</span><span>Sem 3</span><span>Sem 4</span></div>
+        </article>
+        <article class="panel performance-panel">
+          <div class="panel-heading"><div><h2>Rendimiento</h2><p>Calidad de servicio</p></div></div>
+          <div class="performance-item"><span>Reparaciones completadas</span><b>92%</b><i><em class="performance-green"></em></i></div>
+          <div class="performance-item"><span>Entregas a tiempo</span><b>87%</b><i><em class="performance-blue"></em></i></div>
+          <div class="performance-item"><span>Satisfaccion del cliente</span><b>4.8/5</b><i><em class="performance-purple"></em></i></div>
+          <div class="performance-item"><span>Tiempo promedio</span><b>2.4 dias</b><i><em class="performance-orange"></em></i></div>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="manageModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="manageTitle">
+      <button class="modal-close" id="closeManageModal" aria-label="Cerrar">×</button>
+      <span class="eyebrow">GESTION DEL TALLER</span>
+      <h2 id="manageTitle">Modificar registro</h2>
+      <p id="manageDescription">Actualiza la informacion seleccionada.</p>
+      <form id="manageForm"></form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="db.js"></script>
+<script src="app.js"></script>
+
+<!-- CHATBOT FIXLAB -->
+
+
+<div id="ayuda-fixlab">
+  <section
+    id="ventana-ayuda"
+    aria-label="Asistente FixLab"
+    hidden
+  >
+    <div id="cabecera-ayuda">
+      <div>
+        <strong>Asistente FixLab</strong>
+        <small>Ayuda local · Respuestas programadas</small>
+      </div>
+
+      <button
+        id="cerrar-ayuda"
+        type="button"
+        aria-label="Cerrar chatbot"
+      >×</button>
+    </div>
+
+    <div
+      id="mensajes-ayuda"
+      role="log"
+      aria-live="polite"
+      aria-label="Conversación"
+    ></div>
+
+    <div id="opciones-ayuda">
+      <button type="button">Resumen</button>
+      <button type="button">Ver órdenes</button>
+      <button type="button">Stock bajo</button>
+      <button type="button">Nueva reparación</button>
+    </div>
+
+    <form id="formulario-ayuda">
+      <input
+        id="consulta-ayuda"
+        type="text"
+        placeholder="Escribe tu consulta..."
+        aria-label="Escribe tu consulta"
+        maxlength="500"
+        autocomplete="off"
+        required
+      >
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
+
+  <button
+    id="abrir-ayuda"
+    type="button"
+    aria-controls="ventana-ayuda"
+    aria-expanded="false"
+  >💬 Asistente FixLab</button>
+</div>
+
+<script src="ayuda.js"></script>
+
+
+
+
+<script src="almacen.js"></script>
+</div>
+<script id="sc-auth-script" src="usuarios.js"></script>
+</body>
+</html>

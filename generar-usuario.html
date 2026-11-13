@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FixLab · Generar nuevo usuario</title>
+<link rel="stylesheet" href="generar-usuario.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo" aria-hidden="true">FL</div>
+    <div>
+      <div class="brand">FIXLAB · TALLER MÓVIL</div>
+      <h1>Generar nuevo usuario</h1>
+      <p>Crea la cuenta, comparte la contraseña y la persona podrá ingresar al sistema.</p>
+    </div>
+  </header>
+
+  <div class="grid">
+    <section class="card" aria-labelledby="t-new">
+      <div class="card-head">
+        <div>
+          <h2 id="t-new">Datos del nuevo usuario</h2>
+          <p>Completa los cuatro campos y elige el rol.</p>
+        </div>
+      </div>
+
+      <form id="new-user" autocomplete="off" novalidate>
+        <label class="lbl" for="name">Nombre completo</label>
+        <input class="field" id="name" maxlength="60" placeholder="Ej. Juan Pérez">
+
+        <label class="lbl" for="username">Nombre de usuario</label>
+        <input class="field" id="username" maxlength="20" placeholder="Ej. juan.perez" autocapitalize="none" spellcheck="false">
+        <p class="hint">De 3 a 20 caracteres: letras sin acento, números, punto, guion o guion bajo.</p>
+
+        <span class="lbl" id="role-title">Rol</span>
+        <div class="roles" role="radiogroup" aria-labelledby="role-title">
+          <label class="role">
+            <input type="radio" name="role" value="pasante" checked>
+            <span><b>Pasante</b><small>Registra clientes y equipos. Sin acceso a precios ni reportes.</small></span>
+          </label>
+          <label class="role">
+            <input type="radio" name="role" value="admin">
+            <span><b>Administrador</b><small>Acceso completo, incluida la configuración y los reportes.</small></span>
+          </label>
+        </div>
+
+        <label class="lbl" for="password">Contraseña</label>
+        <div class="row">
+          <input class="field" id="password" maxlength="64" placeholder="Mínimo 8 caracteres">
+          <button type="button" class="btn" id="generate">Generar</button>
+        </div>
+
+        <button class="btn primary" type="submit">＋ Crear usuario</button>
+      </form>
+      <div class="msg" id="form-msg" role="status" aria-live="polite"></div>
+    </section>
+
+    <section class="card" aria-labelledby="t-list">
+      <div class="card-head">
+        <div>
+          <h2 id="t-list">Usuarios creados</h2>
+          <p>Puedes restablecer una contraseña o eliminar una cuenta.</p>
+        </div>
+        <span class="count" id="count">0 cuentas</span>
+      </div>
+      <div class="list" id="list"></div>
+      <div class="msg list-msg" id="list-msg" role="status" aria-live="polite"></div>
+      <p class="note">Las cuentas se guardan en este navegador. Para usarlas desde otros equipos, se necesita un servidor.</p>
+    </section>
+
+    <section class="card wide" aria-labelledby="t-login">
+      <div class="card-head">
+        <div>
+          <h2 id="t-login">Probar ingreso</h2>
+          <p>Escribe el usuario y la contraseña para comprobar que la persona puede entrar.</p>
+        </div>
+      </div>
+      <form id="login" class="login-grid" autocomplete="off">
+        <div>
+          <label class="lbl" for="l-user">Usuario</label>
+          <input class="field" id="l-user" autocapitalize="none" spellcheck="false">
+        </div>
+        <div>
+          <label class="lbl" for="l-pass">Contraseña</label>
+          <input class="field" id="l-pass" type="password">
+        </div>
+        <button class="btn primary" type="submit">Ingresar</button>
+      </form>
+      <div class="msg" id="login-msg" role="status" aria-live="polite"></div>
+    </section>
+  </div>
+</div>
+
+<script src="db.js"></script>
+<script src="generar-usuario.js"></script>
+</body>
+</html>
